@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { createStableContext } from "./stable-context";
 import type { ListEntry, Mode } from "@/lib/planner";
 import { addParsedMatches, type ParsedList } from "@/lib/parse-list";
 
@@ -11,7 +12,7 @@ type Ctx = Trip & {
   addMatches: (matches: ParsedList["matches"]) => void;
   setPlan: (p: Trip["plan"]) => void;
 };
-const TripContext = createContext<Ctx | null>(null);
+const TripContext = createStableContext<Ctx | null>("snap-trip", null);
 const KEY = "snap-trip";
 
 export function TripProvider({ children }: { children: ReactNode }) {
