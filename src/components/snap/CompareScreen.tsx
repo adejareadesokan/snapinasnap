@@ -5,7 +5,7 @@ import { Badge, Card, Footer, Header, SampleLabel, Shell, money } from "./Shared
 import { useT } from "@/context/LanguageContext";
 import { useTrip } from "@/context/TripContext";
 import { config, deals, items, stores, zipCoords } from "@/data/snapData";
-import { bestSplitPlan, priceAt, singleStorePlans, type Plan } from "@/lib/planner";
+import { bestSplitPlan, singleStorePlans, type Plan } from "@/lib/planner";
 import { cn } from "@/lib/utils";
 
 export function CompareScreen() {
@@ -179,7 +179,7 @@ function PlanCard({ plan, best, onChoose }: { plan: Plan; best: boolean; onChoos
           <div className="rounded-xl bg-muted p-2 text-muted-foreground"><dt className="text-sm">{t("cashPart")}</dt><dd className="text-lg font-bold">{money(plan.cashSubtotal)}</dd></div>
         </div>
       </dl>
-      <p className="mt-2"><SampleLabel /></p>
+      <div className="mt-2"><SampleLabel /></div>
       <button type="button" onClick={onChoose} className="tap mt-3 w-full rounded-xl bg-primary px-4 font-bold text-primary-foreground">{t("choose")}</button>
     </Card>
   );
@@ -193,5 +193,3 @@ function Row({ label, value, strong }: { label: string; value: string; strong?: 
   );
 }
 
-// re-export for tests / reuse
-export { priceAt };
