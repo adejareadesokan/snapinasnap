@@ -33,3 +33,5 @@ use the editor.
 - Never name a route file route.tsx (reserved by TanStack Router); the route screen lives at /trip.
 - AI list parsing uses a public POST createServerFn in src/lib/parse-list.functions.ts and server-only AI SDK Responses helpers; the existing src/data catalog is authoritative so AI and search cannot drift.
 - Validate AI output and merge explicit quantities through src/lib/parse-list.ts; keep AI input/results ephemeral and catch errors before shared logging to avoid recording submitted text.
+- Shared Header and Footer own the compact language selector and fixed telephone bar; Shell reserves footer space, and Home separately reserves its fixed comparison action so content is never covered.
+- Use accessible Collapsible disclosures for secondary plans, sale sections, and nearby stops; preserve complete details and existing handlers behind each summary row.

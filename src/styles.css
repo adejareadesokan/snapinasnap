@@ -128,3 +128,9 @@
     font-size: 17px;
   }
 }
+
+.leaflet-control-zoom a {
+  min-width: 44px;
+  min-height: 44px;
+  line-height: 44px;
+}

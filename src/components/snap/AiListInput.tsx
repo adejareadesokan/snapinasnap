@@ -62,23 +62,23 @@ export function AiListInput() {
   };
 
   return (
-    <div className="mt-3">
-      <label htmlFor="ai-list" className="block text-base font-medium">{t("aiListLabel")}</label>
+    <div className="mt-2">
+      <label htmlFor="ai-list" className="block text-sm font-medium">{t("aiListLabel")}</label>
       <textarea
         id="ai-list"
         value={text}
         placeholder={t("aiListPlaceholder")}
         onChange={(event) => setText(event.target.value)}
         disabled={loading}
-        rows={3}
+        rows={2}
         aria-describedby={error ? "ai-list-error" : undefined}
-        className="mt-2 min-h-24 w-full resize-y rounded-xl border border-input bg-card px-4 py-3 text-base focus:outline-2 focus:outline-primary disabled:opacity-60"
+        className="mt-1 min-h-16 w-full resize-y rounded-lg border border-input bg-card px-3 py-2 text-base focus:outline-2 focus:outline-primary disabled:opacity-60"
       />
       <Button
         type="button"
         disabled={loading || !text.trim()}
         onClick={submit}
-        className="tap mt-2 h-auto w-full whitespace-normal rounded-xl px-4 text-base font-semibold shadow-none"
+        className="tap mt-1 h-auto w-full whitespace-normal rounded-lg px-3 text-sm font-semibold shadow-none"
       >
         {loading ? <LoaderCircle className="h-5 w-5 animate-spin motion-reduce:animate-none" aria-hidden /> : <Plus className="h-5 w-5" aria-hidden />}
         {loading ? t("aiListLoading") : t("aiListAdd")}
@@ -87,19 +87,19 @@ export function AiListInput() {
       {error && <p id="ai-list-error" role="alert" className="mt-2 text-base text-destructive">{t("aiListError")}{serviceError && <span className="mt-1 block">{serviceError}</span>}</p>}
       <div aria-live="polite">
         {suggestions.length > 0 && (
-          <ul aria-label={t("mightNeed")} className="mt-3 flex flex-col gap-2">
+          <ul aria-label={t("mightNeed")} className="mt-2 flex flex-col gap-2">
             {suggestions.map((suggestion) => {
               const item = items.find((candidate) => candidate.id === suggestion.item_id);
               if (!item) return null;
               return (
                 <li key={item.id} className="rounded-lg border border-border p-3">
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
                     <div className="min-w-0">
-                      <p className="break-words font-medium">{item.name}</p>
+                      <p className="break-words text-sm font-medium">{item.name}</p>
                       <div className="mt-1"><Badge variant={item.snap ? "snap" : "not"}>{item.snap ? t("snap") : t("notSnap")}</Badge></div>
                       <p className="mt-2 break-words text-sm text-muted-foreground">{suggestion.reason}</p>
                     </div>
-                    <Button type="button" className="tap h-auto shrink-0 rounded-xl px-3 font-semibold shadow-none" onClick={() => {
+                    <Button type="button" className="tap h-auto shrink-0 rounded-lg px-3 font-semibold shadow-none" onClick={() => {
                       addItem(item.id);
                       setSuggestions((current) => current.filter((entry) => entry.item_id !== item.id));
                     }}>
