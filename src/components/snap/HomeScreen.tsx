@@ -7,6 +7,7 @@ import { useTrip } from "@/context/TripContext";
 import { items, usualCart, zipCoords } from "@/data/snapData";
 import type { Mode } from "@/lib/planner";
 import { cn } from "@/lib/utils";
+import { AiListInput } from "./AiListInput";
 
 export function HomeScreen() {
   const { t, lang, setLang } = useT();
@@ -100,6 +101,7 @@ export function HomeScreen() {
 
         <Card>
           <h2 className="text-xl font-bold">{t("yourList")}</h2>
+          <AiListInput />
           <label htmlFor="search" className="mt-3 block text-base font-medium">{t("searchItems")}</label>
           <div className="relative mt-2">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" aria-hidden />
