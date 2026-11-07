@@ -1,5 +1,11 @@
 # AI shopping list
 
+## Welcome and EBT information pages
+- [x] Add welcome at / and move the unchanged shopping screen to /shop with corrected internal navigation.
+- [x] Add translated Learn disclosures and Help contacts with exact official links.
+- [x] Make the shared app name return to welcome and add Back to start links.
+- [x] Verify all three choices fit 440x956, language carries across pages, and existing shopping flow works.
+
 ## Preview context crash
 - [x] Reproduce missing-provider errors from duplicate context modules after partial preview reload.
 - [x] Preserve both context identities during browser development without changing production or storing user values.
