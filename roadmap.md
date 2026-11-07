@@ -2,8 +2,8 @@
 
 ## Preview context crash
 - [x] Reproduce missing-provider errors from duplicate context modules after partial preview reload.
-- [ ] Preserve both context identities during browser development without changing production or storing user values.
-- [ ] Verify the reproduction, provider isolation tests, and populated Home → Compare → Trip flow.
+- [x] Preserve both context identities during browser development without changing production or storing user values.
+- [x] Verify the reproduction, provider isolation tests, and populated Home → Compare → Trip flow.
 
 ## Categorized catalog and meal suggestions
 - [x] Replace only items and usual cart with the supplied catalog and prices.
