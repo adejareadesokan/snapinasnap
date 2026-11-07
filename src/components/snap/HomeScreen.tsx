@@ -4,17 +4,19 @@ import { Bus, Car, Footprints, Minus, Plus, Search, ShoppingCart, Trash2 } from 
 import { Badge, Card, Footer, Header, Shell } from "./Shared";
 import { useT } from "@/context/LanguageContext";
 import { useTrip } from "@/context/TripContext";
-import { items, usualCart, zipCoords } from "@/data/snapData";
+import { categories, items, usualCart, zipCoords, type CategoryFilter } from "@/data/snapData";
+import { searchCatalog } from "@/lib/catalog";
 import type { Mode } from "@/lib/planner";
 import { cn } from "@/lib/utils";
 import { AiListInput } from "./AiListInput";
 import { Button } from "@/components/ui/button";
 
 export function HomeScreen() {
-  const { t } = useT();
+  const { t, itemName } = useT();
   const trip = useTrip();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<CategoryFilter>("All");
   const [touched, setTouched] = useState(false);
   const [usualLoaded, setUsualLoaded] = useState(false);
   const [error, setError] = useState("");
@@ -22,11 +24,7 @@ export function HomeScreen() {
   const zipValid = !!zipCoords[trip.zip];
   const showZipErr = touched && trip.zip.length > 0 && !zipValid;
 
-  const matches = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return [];
-    return items.filter((i) => i.name.toLowerCase().includes(q)).slice(0, 6);
-  }, [query]);
+  const matches = useMemo(() => searchCatalog(query, category, itemName), [query, category, itemName]);
 
   const modes: { id: Mode; icon: typeof Car; label: string }[] = [
     { id: "car", icon: Car, label: t("mode_car") },
@@ -105,12 +103,21 @@ export function HomeScreen() {
               className="tap w-full rounded-xl border border-input bg-card pl-10 pr-4 text-base"
             />
           </div>
+          <div role="group" aria-label={t("categoryFilter")} className="mt-1 flex gap-1 overflow-x-auto">
+            {categories.map((value) => (
+              <Button key={value} type="button" variant={category === value ? "default" : "outline"}
+                aria-pressed={category === value} onClick={() => setCategory(value)}
+                className="tap h-11 shrink-0 rounded-full px-3 text-xs shadow-none">
+                {t(`category_${value}`)}
+              </Button>
+            ))}
+          </div>
           {matches.length > 0 && (
             <ul className="mt-2 divide-y divide-border rounded-xl border border-border">
               {matches.map((i) => (
                 <li key={i.id} className="flex items-center justify-between gap-2 px-3 py-2">
                   <div>
-                    <div>{i.name}</div>
+                    <div>{itemName(i.id)}</div>
                     <Badge variant={i.snap ? "snap" : "not"}>{i.snap ? t("snap") : t("notSnap")}</Badge>
                   </div>
                   <Button
@@ -145,10 +152,10 @@ export function HomeScreen() {
                 if (!item) return null;
                 return (
                   <li key={e.item} className="grid h-11 grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-1">
-                    <div className="min-w-0" title={[item.name, item.note].filter(Boolean).join(" · ")}>
-                      <div className="truncate text-xs font-medium leading-4">{item.name}</div>
+                    <div className="min-w-0" title={[itemName(item.id), item.note ? t("hotFoodNote") : undefined].filter(Boolean).join(" · ")}>
+                      <div className="truncate text-xs font-medium leading-4">{itemName(item.id)}</div>
                       <div className="leading-4"><Badge variant={item.snap ? "snap" : "not"}>{item.snap ? t("snap") : t("notSnap")}</Badge></div>
-                      {item.note && <p className="sr-only">{item.note}</p>}
+                      {item.note && <p className="sr-only">{t("hotFoodNote")}</p>}
                     </div>
                     <div className="flex shrink-0 items-center">
                       <span className="sr-only">{t("qty")}</span>
@@ -156,7 +163,7 @@ export function HomeScreen() {
                       <span className="min-w-5 text-center text-sm font-semibold" aria-live="polite">{e.qty}</span>
                       <Button type="button" variant="ghost" size="icon" aria-label={t("increase")} onClick={() => setQty(e.item, e.qty + 1)} className="tap h-11 w-11 rounded-lg"><Plus aria-hidden /></Button>
                     </div>
-                    <Button type="button" variant="ghost" size="icon" aria-label={`${t("remove")} ${item.name}`} onClick={() => setQty(e.item, 0)} className="tap h-11 w-11 rounded-lg text-muted-foreground"><Trash2 aria-hidden /></Button>
+                    <Button type="button" variant="ghost" size="icon" aria-label={`${t("remove")} ${itemName(item.id)}`} onClick={() => setQty(e.item, 0)} className="tap h-11 w-11 rounded-lg text-muted-foreground"><Trash2 aria-hidden /></Button>
                   </li>
                 );
               })}

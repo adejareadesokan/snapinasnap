@@ -1,0 +1,848 @@
+[
+  {
+    "id": "eggs",
+    "name": "Eggs, 1 dozen",
+    "category": "Breakfast",
+    "snap": true,
+    "prices": [
+      3.29,
+      2.99,
+      3.49,
+      2.79,
+      3.69
+    ]
+  },
+  {
+    "id": "milk",
+    "name": "Milk, 1 gallon",
+    "category": "Breakfast",
+    "snap": true,
+    "prices": [
+      3.79,
+      3.49,
+      3.99,
+      3.29,
+      4.19
+    ]
+  },
+  {
+    "id": "cereal",
+    "name": "Cereal, 12 oz",
+    "category": "Breakfast",
+    "snap": true,
+    "prices": [
+      3.49,
+      2.99,
+      3.79,
+      3.29,
+      3.99
+    ]
+  },
+  {
+    "id": "oatmeal",
+    "name": "Oatmeal, 18 oz",
+    "category": "Breakfast",
+    "snap": true,
+    "prices": [
+      2.99,
+      2.69,
+      3.19,
+      2.59,
+      3.39
+    ]
+  },
+  {
+    "id": "grits",
+    "name": "Grits, 24 oz",
+    "category": "Breakfast",
+    "snap": true,
+    "prices": [
+      2.49,
+      2.29,
+      2.69,
+      2.19,
+      2.79
+    ]
+  },
+  {
+    "id": "pancake_mix",
+    "name": "Pancake mix, 32 oz",
+    "category": "Breakfast",
+    "snap": true,
+    "prices": [
+      2.99,
+      2.69,
+      3.19,
+      2.59,
+      3.39
+    ]
+  },
+  {
+    "id": "syrup",
+    "name": "Pancake syrup, 24 oz",
+    "category": "Breakfast",
+    "snap": true,
+    "prices": [
+      2.79,
+      2.59,
+      2.99,
+      2.49,
+      3.19
+    ]
+  },
+  {
+    "id": "bacon",
+    "name": "Bacon, 12 oz",
+    "category": "Breakfast",
+    "snap": true,
+    "prices": [
+      5.49,
+      4.99,
+      5.79,
+      4.79,
+      null
+    ]
+  },
+  {
+    "id": "butter",
+    "name": "Butter, 1 lb",
+    "category": "Breakfast",
+    "snap": true,
+    "prices": [
+      4.29,
+      3.99,
+      4.49,
+      3.79,
+      4.69
+    ]
+  },
+  {
+    "id": "oj",
+    "name": "Orange juice, 52 oz",
+    "category": "Breakfast",
+    "snap": true,
+    "prices": [
+      3.99,
+      3.69,
+      4.19,
+      3.49,
+      4.29
+    ]
+  },
+  {
+    "id": "bread",
+    "name": "Bread, 1 loaf",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      2.49,
+      2.29,
+      2.79,
+      1.99,
+      2.89
+    ]
+  },
+  {
+    "id": "turkey",
+    "name": "Sliced turkey, 9 oz",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      3.99,
+      3.79,
+      4.29,
+      3.49,
+      4.49
+    ]
+  },
+  {
+    "id": "bologna",
+    "name": "Bologna, 16 oz",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      2.49,
+      2.29,
+      2.69,
+      2.19,
+      2.79
+    ]
+  },
+  {
+    "id": "cheese_slices",
+    "name": "American cheese slices, 12 ct",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      2.99,
+      2.79,
+      3.19,
+      2.69,
+      3.29
+    ]
+  },
+  {
+    "id": "tuna",
+    "name": "Canned tuna, 5 oz",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      1.29,
+      1.19,
+      1.39,
+      1.09,
+      1.49
+    ]
+  },
+  {
+    "id": "mayo",
+    "name": "Mayonnaise, 30 oz",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      3.99,
+      3.69,
+      4.19,
+      3.49,
+      4.39
+    ]
+  },
+  {
+    "id": "tortillas",
+    "name": "Flour tortillas, 10 ct",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      2.49,
+      2.29,
+      2.69,
+      2.19,
+      2.79
+    ]
+  },
+  {
+    "id": "pb",
+    "name": "Peanut butter, 16 oz",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      2.79,
+      2.49,
+      2.99,
+      2.59,
+      3.19
+    ]
+  },
+  {
+    "id": "jelly",
+    "name": "Grape jelly, 18 oz",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      2.29,
+      2.09,
+      2.49,
+      1.99,
+      2.59
+    ]
+  },
+  {
+    "id": "ramen",
+    "name": "Ramen noodles, 6 pack",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      1.99,
+      1.79,
+      2.19,
+      1.69,
+      2.29
+    ]
+  },
+  {
+    "id": "soup",
+    "name": "Canned soup, 10.5 oz",
+    "category": "Lunch",
+    "snap": true,
+    "prices": [
+      1.49,
+      1.39,
+      1.59,
+      1.29,
+      1.69
+    ]
+  },
+  {
+    "id": "chicken",
+    "name": "Chicken thighs, 3 lb",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      7.49,
+      6.99,
+      7.99,
+      6.49,
+      8.29
+    ]
+  },
+  {
+    "id": "beef",
+    "name": "Ground beef, 1 lb",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      5.49,
+      4.99,
+      5.79,
+      4.89,
+      5.99
+    ]
+  },
+  {
+    "id": "sausage",
+    "name": "Smoked sausage, 13 oz",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      3.99,
+      3.79,
+      4.29,
+      3.49,
+      4.49
+    ]
+  },
+  {
+    "id": "pork_chops",
+    "name": "Pork chops, 2 lb",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      6.99,
+      6.49,
+      7.29,
+      5.99,
+      null
+    ]
+  },
+  {
+    "id": "catfish",
+    "name": "Frozen catfish fillets, 2 lb",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      8.99,
+      8.49,
+      9.49,
+      7.99,
+      null
+    ]
+  },
+  {
+    "id": "shrimp",
+    "name": "Frozen shrimp, 1 lb",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      7.99,
+      7.49,
+      8.49,
+      6.99,
+      null
+    ]
+  },
+  {
+    "id": "rice",
+    "name": "Rice, 5 lb",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      4.99,
+      4.49,
+      5.29,
+      4.29,
+      5.49
+    ]
+  },
+  {
+    "id": "red_beans",
+    "name": "Red beans, 2 lb",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      2.99,
+      2.69,
+      3.19,
+      2.59,
+      3.29
+    ]
+  },
+  {
+    "id": "pinto",
+    "name": "Pinto beans, 2 lb",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      2.79,
+      2.49,
+      2.99,
+      2.39,
+      3.19
+    ]
+  },
+  {
+    "id": "pasta",
+    "name": "Spaghetti, 16 oz",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      1.29,
+      1.19,
+      1.39,
+      1.09,
+      1.49
+    ]
+  },
+  {
+    "id": "pasta_sauce",
+    "name": "Pasta sauce, 24 oz",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      2.49,
+      2.29,
+      2.69,
+      2.19,
+      2.79
+    ]
+  },
+  {
+    "id": "mac_cheese",
+    "name": "Boxed mac and cheese",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      1.19,
+      0.99,
+      1.29,
+      0.95,
+      1.39
+    ]
+  },
+  {
+    "id": "cornbread_mix",
+    "name": "Cornbread mix, 8.5 oz",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      0.89,
+      0.79,
+      0.99,
+      0.75,
+      1.09
+    ]
+  },
+  {
+    "id": "frozen_veg",
+    "name": "Frozen mixed vegetables, 12 oz",
+    "category": "Dinner",
+    "snap": true,
+    "prices": [
+      1.29,
+      1.19,
+      1.39,
+      1.09,
+      1.49
+    ]
+  },
+  {
+    "id": "rotisserie",
+    "name": "Hot rotisserie chicken",
+    "category": "Dinner",
+    "snap": false,
+    "note": "Hot food is not SNAP eligible",
+    "prices": [
+      6.99,
+      7.49,
+      7.29,
+      6.49,
+      null
+    ]
+  },
+  {
+    "id": "bananas",
+    "name": "Bananas, 2 lb",
+    "category": "Produce",
+    "snap": true,
+    "prices": [
+      1.18,
+      1.1,
+      1.3,
+      1.02,
+      1.38
+    ]
+  },
+  {
+    "id": "apples",
+    "name": "Apples, 3 lb bag",
+    "category": "Produce",
+    "snap": true,
+    "prices": [
+      4.49,
+      3.99,
+      4.79,
+      3.89,
+      4.99
+    ]
+  },
+  {
+    "id": "oranges",
+    "name": "Oranges, 3 lb bag",
+    "category": "Produce",
+    "snap": true,
+    "prices": [
+      4.49,
+      3.99,
+      4.79,
+      3.89,
+      4.99
+    ]
+  },
+  {
+    "id": "onions",
+    "name": "Onions, 3 lb",
+    "category": "Produce",
+    "snap": true,
+    "prices": [
+      2.99,
+      2.79,
+      3.19,
+      2.69,
+      3.29
+    ]
+  },
+  {
+    "id": "bell_peppers",
+    "name": "Green bell peppers, 3 ct",
+    "category": "Produce",
+    "snap": true,
+    "prices": [
+      2.49,
+      2.29,
+      2.69,
+      2.19,
+      null
+    ]
+  },
+  {
+    "id": "celery",
+    "name": "Celery, 1 bunch",
+    "category": "Produce",
+    "snap": true,
+    "prices": [
+      1.79,
+      1.59,
+      1.99,
+      1.49,
+      null
+    ]
+  },
+  {
+    "id": "potatoes",
+    "name": "Potatoes, 5 lb",
+    "category": "Produce",
+    "snap": true,
+    "prices": [
+      3.99,
+      3.49,
+      4.29,
+      3.29,
+      4.49
+    ]
+  },
+  {
+    "id": "carrots",
+    "name": "Carrots, 2 lb",
+    "category": "Produce",
+    "snap": true,
+    "prices": [
+      1.99,
+      1.79,
+      2.19,
+      1.69,
+      2.29
+    ]
+  },
+  {
+    "id": "oil",
+    "name": "Cooking oil, 48 oz",
+    "category": "Pantry",
+    "snap": true,
+    "prices": [
+      4.29,
+      3.99,
+      4.49,
+      3.89,
+      4.79
+    ]
+  },
+  {
+    "id": "tomatoes",
+    "name": "Canned tomatoes, 14 oz",
+    "category": "Pantry",
+    "snap": true,
+    "prices": [
+      1.09,
+      0.99,
+      1.19,
+      0.95,
+      1.29
+    ]
+  },
+  {
+    "id": "flour",
+    "name": "Flour, 5 lb",
+    "category": "Pantry",
+    "snap": true,
+    "prices": [
+      3.29,
+      2.99,
+      3.49,
+      2.79,
+      3.69
+    ]
+  },
+  {
+    "id": "sugar",
+    "name": "Sugar, 4 lb",
+    "category": "Pantry",
+    "snap": true,
+    "prices": [
+      3.49,
+      3.19,
+      3.69,
+      2.99,
+      3.89
+    ]
+  },
+  {
+    "id": "cajun_seasoning",
+    "name": "Cajun seasoning, 8 oz",
+    "category": "Pantry",
+    "snap": true,
+    "prices": [
+      2.99,
+      2.79,
+      3.19,
+      2.59,
+      3.29
+    ]
+  },
+  {
+    "id": "juice_boxes",
+    "name": "Juice boxes, 8 pack",
+    "category": "Snacks",
+    "snap": true,
+    "prices": [
+      3.49,
+      3.19,
+      3.69,
+      2.99,
+      3.89
+    ]
+  },
+  {
+    "id": "granola",
+    "name": "Granola bars, 8 ct",
+    "category": "Snacks",
+    "snap": true,
+    "prices": [
+      2.99,
+      2.79,
+      3.19,
+      2.69,
+      3.29
+    ]
+  },
+  {
+    "id": "yogurt",
+    "name": "Yogurt cups, 4 pack",
+    "category": "Snacks",
+    "snap": true,
+    "prices": [
+      2.79,
+      2.59,
+      2.99,
+      2.49,
+      null
+    ]
+  },
+  {
+    "id": "string_cheese",
+    "name": "String cheese, 12 ct",
+    "category": "Snacks",
+    "snap": true,
+    "prices": [
+      4.49,
+      4.19,
+      4.79,
+      3.99,
+      null
+    ]
+  },
+  {
+    "id": "crackers",
+    "name": "Crackers, 13 oz",
+    "category": "Snacks",
+    "snap": true,
+    "prices": [
+      2.99,
+      2.69,
+      3.19,
+      2.59,
+      3.29
+    ]
+  },
+  {
+    "id": "fruit_cups",
+    "name": "Fruit cups, 4 pack",
+    "category": "Snacks",
+    "snap": true,
+    "prices": [
+      2.49,
+      2.29,
+      2.69,
+      2.19,
+      2.79
+    ]
+  },
+  {
+    "id": "water",
+    "name": "Bottled water, 24 pack",
+    "category": "Snacks",
+    "snap": true,
+    "prices": [
+      3.99,
+      3.49,
+      4.29,
+      3.29,
+      4.49
+    ]
+  },
+  {
+    "id": "formula",
+    "name": "Baby formula, 12.4 oz",
+    "category": "Baby",
+    "snap": true,
+    "prices": [
+      17.99,
+      16.99,
+      18.49,
+      16.49,
+      null
+    ]
+  },
+  {
+    "id": "baby_food",
+    "name": "Baby food jars, 4 pack",
+    "category": "Baby",
+    "snap": true,
+    "prices": [
+      3.99,
+      3.69,
+      4.19,
+      3.49,
+      null
+    ]
+  },
+  {
+    "id": "diapers",
+    "name": "Diapers, 30 ct",
+    "category": "Baby",
+    "snap": false,
+    "prices": [
+      9.99,
+      9.49,
+      10.49,
+      8.99,
+      10.99
+    ]
+  },
+  {
+    "id": "wipes",
+    "name": "Baby wipes, 72 ct",
+    "category": "Baby",
+    "snap": false,
+    "prices": [
+      3.49,
+      3.19,
+      3.69,
+      2.99,
+      3.89
+    ]
+  },
+  {
+    "id": "paper_towels",
+    "name": "Paper towels, 6 rolls",
+    "category": "Household",
+    "snap": false,
+    "prices": [
+      7.49,
+      6.99,
+      7.99,
+      6.79,
+      8.29
+    ]
+  },
+  {
+    "id": "toilet_paper",
+    "name": "Toilet paper, 12 rolls",
+    "category": "Household",
+    "snap": false,
+    "prices": [
+      8.99,
+      8.49,
+      9.49,
+      7.99,
+      9.99
+    ]
+  },
+  {
+    "id": "dish_soap",
+    "name": "Dish soap",
+    "category": "Household",
+    "snap": false,
+    "prices": [
+      2.49,
+      2.29,
+      2.69,
+      2.19,
+      2.79
+    ]
+  },
+  {
+    "id": "laundry",
+    "name": "Laundry detergent, 92 oz",
+    "category": "Household",
+    "snap": false,
+    "prices": [
+      10.99,
+      9.99,
+      11.49,
+      9.49,
+      11.99
+    ]
+  },
+  {
+    "id": "toothpaste",
+    "name": "Toothpaste",
+    "category": "Household",
+    "snap": false,
+    "prices": [
+      2.99,
+      2.79,
+      3.19,
+      2.69,
+      3.29
+    ]
+  }
+]

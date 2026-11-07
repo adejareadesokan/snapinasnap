@@ -7,7 +7,7 @@ export type Lang = "en" | "es" | "vi";
 type Key = keyof typeof en;
 const dicts: Record<Lang, Record<Key, string>> = { en, es, vi };
 
-type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: Key, vars?: Record<string, string | number>) => string };
+type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: Key, vars?: Record<string, string | number>) => string; itemName: (id: string) => string };
 const LanguageContext = createContext<Ctx | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -31,7 +31,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     },
     [lang],
   );
-  return <LanguageContext.Provider value={{ lang, setLang, t }}>{children}</LanguageContext.Provider>;
+  const itemName = useCallback((id: string) => {
+    const key = `item_${id}` as Key;
+    return dicts[lang][key] ?? dicts.en[key] ?? id;
+  }, [lang]);
+  return <LanguageContext.Provider value={{ lang, setLang, t, itemName }}>{children}</LanguageContext.Provider>;
 }
 
 export function useT() {

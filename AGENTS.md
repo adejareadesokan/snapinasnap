@@ -29,9 +29,10 @@ use the editor.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
 
-- SNAP app: sample data lives in src/data, pricing/route math in src/lib/planner.ts (tested), UI strings only in src/i18n/*.json via useT(). Why: keeps data, rules and translations swappable.
+- SNAP app: the categorized item catalog lives in src/data/items.json and is exported through snapData.ts; other sample data stays in src/data, pricing/route math in src/lib/planner.ts (tested), and UI strings in src/i18n/*.json via useT(). Why: keeps data, rules and translations swappable.
+- Catalog search in src/lib/catalog.ts combines category and English/current-language item names; render catalog names through useT().itemName on Home, AI suggestions, and Compare. Why: one catalog and translation source keep browsing and display consistent.
 - Never name a route file route.tsx (reserved by TanStack Router); the route screen lives at /trip.
 - AI list parsing uses a public POST createServerFn in src/lib/parse-list.functions.ts and server-only AI SDK Responses helpers; the existing src/data catalog is authoritative so AI and search cannot drift.
-- Validate AI output and merge explicit quantities through src/lib/parse-list.ts; keep AI input/results ephemeral and catch errors before shared logging to avoid recording submitted text.
+- Validate AI output and merge explicit quantities through src/lib/parse-list.ts; send current item IDs per request and exclude them from normalized and visible suggestions; keep AI input/results ephemeral and catch errors before shared logging to avoid recording submitted text. Why: suggestion context stays current without storing free-form input.
 - Shared Header and Footer own the compact language selector and fixed telephone bar; Shell reserves footer space, and Home separately reserves its fixed comparison action so content is never covered.
 - Use accessible Collapsible disclosures for secondary plans, sale sections, and nearby stops; preserve complete details and existing handlers behind each summary row.

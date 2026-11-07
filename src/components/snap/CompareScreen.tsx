@@ -113,7 +113,7 @@ export function CompareScreen() {
 }
 
 function DealRow({ itemId, storeId, sale, ends, action }: { itemId: string; storeId: string; sale: number; ends: string; action?: React.ReactNode }) {
-  const { t } = useT();
+  const { t, itemName } = useT();
   const item = items.find((i) => i.id === itemId);
   const idx = stores.findIndex((s) => s.id === storeId);
   const store = stores[idx];
@@ -122,7 +122,7 @@ function DealRow({ itemId, storeId, sale, ends, action }: { itemId: string; stor
   return (
     <li className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-b border-border py-2 last:border-0">
       <div className="min-w-0">
-        <div className="text-sm font-medium">{item.name}</div>
+        <div className="text-sm font-medium">{itemName(item.id)}</div>
         <div className="text-sm text-muted-foreground">{t("at")} {store.name}</div>
         <div className="mt-1 flex flex-wrap items-center gap-2">
           <Badge variant="deal">{t("deal")} · {t("ends", { d: ends })}</Badge>
@@ -152,7 +152,7 @@ function CollapsedPlan({ plan, onChoose }: { plan: Plan; onChoose: () => void })
 }
 
 function PlanCard({ plan, best, onChoose, embedded = false }: { plan: Plan; best: boolean; onChoose: () => void; embedded?: boolean }) {
-  const { t } = useT();
+  const { t, itemName } = useT();
   const trip = useTrip();
   const planStores = plan.storeIds.flatMap((id) => { const store = stores.find((s) => s.id === id); return store ? [store] : []; });
   const tLabel = trip.mode === "car" ? t("gas") : trip.mode === "bus" ? t("transit") : t("walkCost");
@@ -181,7 +181,7 @@ function PlanCard({ plan, best, onChoose, embedded = false }: { plan: Plan; best
           return (
             <li key={l.item} className="grid grid-cols-[minmax(0,1fr)_auto] gap-2">
               <span className="min-w-0">
-                {l.qty} × {item.name}
+                {l.qty} × {itemName(item.id)}
                 {plan.kind === "split" && l.storeId && <span className="text-sm text-muted-foreground"> ({t("stop", { n: plan.storeIds.indexOf(l.storeId) + 1 })})</span>}
                 {l.deal && <span className="ml-1"><Badge variant="deal">{t("deal")} · {t("ends", { d: l.deal.ends })}</Badge></span>}
               </span>

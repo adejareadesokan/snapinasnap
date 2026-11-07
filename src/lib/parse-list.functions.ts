@@ -6,7 +6,7 @@ import { normalizeParsedList, type ParsedList } from "./parse-list";
 import { createResponsesCall } from "./ai/responses.server";
 import { parseListInstructions } from "./parse-list.server";
 
-const requestSchema = z.object({ text: z.string(), lang: z.enum(["en", "es", "vi"]) }).strict();
+const requestSchema = z.object({ text: z.string(), lang: z.enum(["en", "es", "vi"]), current_item_ids: z.array(z.string()).default([]) }).strict();
 type ParseListError = { error: { status: number; message: string | null } };
 
 function failed(status = 500, message: string | null = null): ParseListError {
@@ -29,10 +29,10 @@ export const parseList = createServerFn({ method: "POST" })
         getRequest(),
         { baseURL: "https://ai.gateway.lovable.dev/v1", apiKey, model: "openai/gpt-6-astra" },
         [{ role: "user", content: parsed.data.text.trim() }],
-        parseListInstructions(parsed.data.lang),
+        parseListInstructions(parsed.data.lang, parsed.data.current_item_ids),
       );
       const output = await result.output;
-      return normalizeParsedList(output);
+      return normalizeParsedList(output, parsed.data.current_item_ids);
     } catch (error) {
       // A malformed object is a recoverable failure, not an unhandled logged error.
       if (NoObjectGeneratedError.isInstance(error)) return failed(422);
