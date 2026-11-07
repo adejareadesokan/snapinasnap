@@ -1,8 +1,8 @@
 # AI shopping list
 
 ## Demo pitch video
-- [ ] Render a motion-graphics pitch video using the actual app and its existing branding, without changing the app.
-- [ ] Review the rendered video and deliver the MP4 with any remaining qualifications.
+- [x] Render a motion-graphics pitch video using the actual app and its existing branding, without changing the app.
+- [x] Review frames across all eight scenes, verify the encoded MP4 and audio, and deliver as a draft with full-speed motion review and content qualifications disclosed.
 
 ## Welcome and EBT information pages
 - [x] Add welcome at / and move the unchanged shopping screen to /shop with corrected internal navigation.
