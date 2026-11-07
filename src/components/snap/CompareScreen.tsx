@@ -28,7 +28,7 @@ export function CompareScreen() {
         <main className="px-3">
           <Card>
             <p>{t("needZipAndList")}</p>
-            <Link to="/" className="tap mt-3 flex items-center justify-center rounded-xl bg-primary font-semibold text-primary-foreground">{t("goHome")}</Link>
+            <Link to="/shop" className="tap mt-3 flex items-center justify-center rounded-xl bg-primary font-semibold text-primary-foreground">{t("goHome")}</Link>
           </Card>
         </main>
         <Footer />
@@ -48,7 +48,7 @@ export function CompareScreen() {
       <Header />
       <main className="flex flex-col gap-2 px-3">
         <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-2">
-        <Link to="/" className="tap inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary">
+        <Link to="/shop" className="tap inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary">
           <ArrowLeft className="h-5 w-5" aria-hidden /> {t("back")}
         </Link>
         <h2 className="min-w-0 text-lg font-bold">{t("compareTitle")}</h2>

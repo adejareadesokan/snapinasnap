@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { Phone, Tag } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowLeft, Phone, Tag } from "lucide-react";
 import { useT, type Lang } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
 
@@ -10,14 +11,14 @@ export function Header({ children }: { children?: ReactNode }) {
   return (
     <header className="px-3 pb-2">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-        <div className="flex min-w-0 items-center gap-2">
+        <Link to="/" aria-label={t("appName")} className="tap flex min-w-0 items-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-primary">
           <h1 className="truncate text-lg font-bold leading-tight text-ink">{t("appName")}</h1>
           <div className="flex shrink-0 gap-0.5" aria-hidden>
             <span className="h-1 w-2 rounded-full bg-primary" />
             <span className="h-1 w-2 rounded-full bg-snap" />
             <span className="h-1 w-2 rounded-full bg-gold-accent" />
           </div>
-        </div>
+        </Link>
         <label className="shrink-0">
           <span className="sr-only">{t("language")}</span>
           <select value={lang} onChange={(e) => setLang(e.target.value as Lang)} className="tap max-w-28 rounded-lg border border-border bg-card px-2 text-sm">
@@ -46,6 +47,15 @@ export function Footer() {
         </a>
       </div>
     </footer>
+  );
+}
+
+export function BackToStart() {
+  const { t } = useT();
+  return (
+    <Link to="/" className="tap inline-flex items-center gap-1 self-start text-sm font-semibold text-primary focus-visible:outline-2 focus-visible:outline-primary">
+      <ArrowLeft className="h-4 w-4" aria-hidden />{t("backToStart")}
+    </Link>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { Bus, Car, Footprints, Minus, Plus, Search, ShoppingCart, Trash2 } from "lucide-react";
-import { Badge, Card, Footer, Header, Shell } from "./Shared";
+import { BackToStart, Badge, Card, Footer, Header, Shell } from "./Shared";
 import { useT } from "@/context/LanguageContext";
 import { useTrip } from "@/context/TripContext";
 import { categories, items, usualCart, zipCoords, type CategoryFilter } from "@/data/snapData";
@@ -46,6 +46,7 @@ export function HomeScreen() {
     <Shell>
       <Header />
       <main className="flex flex-col gap-2 px-3 pb-14">
+        <BackToStart />
         <Card>
           <div className="grid grid-cols-[100px_minmax(0,1fr)] items-end gap-2">
           <div className="min-w-0">

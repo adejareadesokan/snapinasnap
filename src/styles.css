@@ -34,6 +34,8 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-welcome-shop: var(--welcome-shop);
+  --color-welcome-shop-foreground: var(--welcome-shop-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -79,6 +81,8 @@
   --popover-foreground: oklch(0.22 0.025 320);
   --primary: oklch(0.33 0.12 315);
   --primary-foreground: oklch(0.99 0 0);
+  --welcome-shop: oklch(0.342490217 0.129748209 307.693336259);
+  --welcome-shop-foreground: oklch(1 0 0);
   --secondary: oklch(0.94 0.012 85);
   --secondary-foreground: oklch(0.22 0.025 320);
   --muted: oklch(0.94 0.012 85);
