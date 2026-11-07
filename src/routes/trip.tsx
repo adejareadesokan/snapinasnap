@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { RouteScreen } from "@/components/snap/RouteScreen";
 
-export const Route = createFileRoute("")({
+export const Route = createFileRoute("/trip")({
   head: () => ({
     meta: [
       { title: "Your route — SNAP in a Snap" },
