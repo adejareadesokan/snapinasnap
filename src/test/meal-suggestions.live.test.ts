@@ -6,14 +6,14 @@ import { normalizeParsedList } from "@/lib/parse-list";
 
 // Opt-in real gateway checks; synthetic grocery text only, no input/output logging.
 // Run with SNAP_LIVE_AI_TEST=1 when changing the meal-planning instructions.
-describe.skipIf(process.env.SNAP_LIVE_AI_TEST !== "1")("Live AI meal rules", () => {
+describe.skipIf(process.env['SNAP_LIVE_AI_TEST'] !== "1")("Live AI meal rules", () => {
   it.each([
     { text: "Breakfast for the kids", lang: "en" as const, meal: "Breakfast", current: ["eggs"] },
     { text: "Algo para la cena", lang: "es" as const, meal: "Dinner", current: ["rice"] },
     { text: "đồ ăn trưa", lang: "vi" as const, meal: "Lunch", current: ["bread"] },
     { text: "Quelque chose pour le souper, s'il vous plaît, en français cadien de Louisiane", lang: "en" as const, meal: "Dinner", current: ["rice"] },
   ])("suggests a simple $meal using its category, never existing or unrequested restricted items", async ({ text, lang, meal, current }) => {
-    const apiKey = process.env.LOVABLE_API_KEY;
+    const apiKey = process.env['LOVABLE_API_KEY'];
     if (!apiKey) throw new Error("Live AI verification requires the configured gateway key");
     const { result } = createResponsesCall(
       new Request("http://localhost:8080"),
@@ -33,7 +33,7 @@ describe.skipIf(process.env.SNAP_LIVE_AI_TEST !== "1")("Live AI meal rules", () 
   }, 120000);
 
   it("still matches explicitly requested Pantry, Household, and Baby items with their quantities", async () => {
-    const apiKey = process.env.LOVABLE_API_KEY;
+    const apiKey = process.env['LOVABLE_API_KEY'];
     if (!apiKey) throw new Error("Live AI verification requires the configured gateway key");
     const { result } = createResponsesCall(
       new Request("http://localhost:8080"),
