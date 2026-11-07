@@ -44,7 +44,7 @@ export function transport(home: LatLng, visit: Store[], mode: Mode): { cost: num
   return { cost: config.walk_cost, miles: dist };
 }
 
-export type LineResult = { item: string; qty: number; storeId: string | null; unit: number | null; deal?: Deal };
+export type LineResult = { item: string; qty: number; storeId: string | null; unit: number | null; deal?: Deal | undefined };
 
 export type Plan = {
   kind: "one" | "split";
@@ -89,7 +89,7 @@ export function bestSplitPlan(list: ListEntry[], home: LatLng, mode: Mode): Plan
   let best: Plan | null = null;
   for (let i = 0; i < stores.length; i++) {
     for (let j = i + 1; j < stores.length; j++) {
-      const pair = [stores[i], stores[j]];
+      const pair = [stores[i]!, stores[j]!];
       const lines: LineResult[] = list.map((e) => {
         let pick: { s: Store; p: number } | null = null;
         for (const s of pair) {
@@ -115,7 +115,7 @@ export function detourMinutes(home: LatLng, visit: Store[], extra: LatLng, mode:
   const pts: LatLng[] = [home, ...visit.map(pt), home];
   let bestAdd = Infinity;
   for (let i = 0; i < pts.length - 1; i++) {
-    const add = miles(pts[i], extra) + miles(extra, pts[i + 1]) - miles(pts[i], pts[i + 1]);
+    const add = miles(pts[i]!, extra) + miles(extra, pts[i + 1]!) - miles(pts[i]!, pts[i + 1]!);
     bestAdd = Math.min(bestAdd, add);
   }
   void base;

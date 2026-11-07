@@ -37,7 +37,7 @@ export function CompareScreen() {
   const listDeals = deals.filter((d) => listIds.has(d.item));
   const suggested = deals.filter((d) => !listIds.has(d.item)).slice(0, 3);
   const choose = (p: Plan) => { trip.setPlan({ kind: p.kind, storeIds: p.storeIds }); navigate({ to: "/trip" }); };
-  const bestSingle = singles[0];
+  const bestSingle = singles[0]!;
 
   return (
     <Shell>
@@ -110,7 +110,7 @@ function DealRow({ itemId, storeId, sale, ends, action }: { itemId: string; stor
   const { t } = useT();
   const item = items.find((i) => i.id === itemId)!;
   const idx = stores.findIndex((s) => s.id === storeId);
-  const store = stores[idx];
+  const store = stores[idx]!;
   const was = item.prices[idx];
   return (
     <li className="flex items-center justify-between gap-2 rounded-xl border border-border p-3">
