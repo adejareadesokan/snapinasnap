@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CompareRouteImport } from './routes/compare'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as LearnRouteImport } from './routes/learn'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as TripRouteImport } from './routes/trip'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +26,21 @@ const CompareRoute = CompareRouteImport.update({
   path: '/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearnRoute = LearnRouteImport.update({
+  id: '/learn',
+  path: '/learn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TripRoute = TripRouteImport.update({
   id: '/trip',
   path: '/trip',
@@ -32,30 +50,42 @@ const TripRoute = TripRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
+  '/help': typeof HelpRoute
+  '/learn': typeof LearnRoute
+  '/shop': typeof ShopRoute
   '/trip': typeof TripRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
+  '/help': typeof HelpRoute
+  '/learn': typeof LearnRoute
+  '/shop': typeof ShopRoute
   '/trip': typeof TripRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
+  '/help': typeof HelpRoute
+  '/learn': typeof LearnRoute
+  '/shop': typeof ShopRoute
   '/trip': typeof TripRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/compare' | '/trip'
+  fullPaths: '/' | '/compare' | '/help' | '/learn' | '/shop' | '/trip'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/compare' | '/trip'
-  id: '__root__' | '/' | '/compare' | '/trip'
+  to: '/' | '/compare' | '/help' | '/learn' | '/shop' | '/trip'
+  id: '__root__' | '/' | '/compare' | '/help' | '/learn' | '/shop' | '/trip'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompareRoute: typeof CompareRoute
+  HelpRoute: typeof HelpRoute
+  LearnRoute: typeof LearnRoute
+  ShopRoute: typeof ShopRoute
   TripRoute: typeof TripRoute
 }
 
@@ -75,6 +105,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learn': {
+      id: '/learn'
+      path: '/learn'
+      fullPath: '/learn'
+      preLoaderRoute: typeof LearnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/trip': {
       id: '/trip'
       path: '/trip'
@@ -88,6 +139,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompareRoute: CompareRoute,
+  HelpRoute: HelpRoute,
+  LearnRoute: LearnRoute,
+  ShopRoute: ShopRoute,
   TripRoute: TripRoute,
 }
 export const routeTree = rootRouteImport
