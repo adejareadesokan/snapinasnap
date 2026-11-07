@@ -2,15 +2,16 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { Bus, Car, Footprints, Minus, Plus, Search, ShoppingCart, Trash2 } from "lucide-react";
 import { Badge, Card, Footer, Header, Shell } from "./Shared";
-import { useT, type Lang } from "@/context/LanguageContext";
+import { useT } from "@/context/LanguageContext";
 import { useTrip } from "@/context/TripContext";
 import { items, usualCart, zipCoords } from "@/data/snapData";
 import type { Mode } from "@/lib/planner";
 import { cn } from "@/lib/utils";
 import { AiListInput } from "./AiListInput";
+import { Button } from "@/components/ui/button";
 
 export function HomeScreen() {
-  const { t, lang, setLang } = useT();
+  const { t } = useT();
   const trip = useTrip();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
@@ -45,24 +46,12 @@ export function HomeScreen() {
 
   return (
     <Shell>
-      <div className="flex justify-end px-5 pt-4">
-        <label className="flex items-center gap-2 text-sm font-medium">
-          {t("language")}
-          <select
-            value={lang}
-            onChange={(e) => setLang(e.target.value as Lang)}
-            className="tap rounded-xl border border-border bg-card px-3 text-base"
-          >
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="vi">Tiếng Việt</option>
-          </select>
-        </label>
-      </div>
       <Header />
-      <main className="flex flex-col gap-4 px-5">
+      <main className="flex flex-col gap-2 px-3 pb-14">
         <Card>
-          <label htmlFor="zip" className="font-semibold">{t("zipLabel")}</label>
+          <div className="grid grid-cols-[100px_minmax(0,1fr)] items-end gap-2">
+          <div className="min-w-0">
+          <label htmlFor="zip" className="block text-xs font-semibold leading-4">{t("zipLabel")}</label>
           <input
             id="zip"
             inputMode="numeric"
@@ -73,37 +62,39 @@ export function HomeScreen() {
             onBlur={() => setTouched(true)}
             aria-invalid={showZipErr}
             aria-describedby="zip-err"
-            className="tap mt-2 w-full rounded-xl border border-input bg-card px-4 text-lg focus:outline-2 focus:outline-primary"
+            className="tap mt-1 w-full rounded-lg border border-input bg-card px-2 text-base focus:outline-2 focus:outline-primary"
           />
-          {showZipErr && <p id="zip-err" className="mt-2 text-base text-destructive">{t("zipError")}</p>}
+          </div>
 
-          <fieldset className="mt-5">
-            <legend className="font-semibold">{t("howGet")}</legend>
-            <div className="mt-2 grid grid-cols-3 gap-2">
+          <fieldset className="min-w-0">
+            <legend className="text-xs font-semibold leading-4">{t("howGet")}</legend>
+            <div className="mt-1 grid grid-cols-3 overflow-hidden rounded-lg border border-border">
               {modes.map(({ id, icon: Icon, label }) => (
-                <button
+                <Button
                   key={id}
                   type="button"
                   aria-pressed={trip.mode === id}
                   onClick={() => trip.setMode(id)}
                   className={cn(
-                    "flex min-h-[72px] flex-col items-center justify-center gap-1 rounded-xl border-2 px-2 text-sm font-semibold leading-tight",
+                    "tap h-auto min-w-0 flex-col gap-0 rounded-none border-0 px-0.5 py-0 text-[10px] font-semibold leading-3 shadow-none whitespace-normal",
                     trip.mode === id ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card",
                   )}
                 >
-                  <Icon className="h-6 w-6" aria-hidden />
+                  <Icon className="h-4 w-4 shrink-0" aria-hidden />
                   {label}
-                </button>
+                </Button>
               ))}
             </div>
           </fieldset>
+          </div>
+          {showZipErr && <p id="zip-err" className="mt-2 text-sm text-destructive">{t("zipError")}</p>}
         </Card>
 
         <Card>
-          <h2 className="text-xl font-bold">{t("yourList")}</h2>
+          <h2 className="text-lg font-bold">{t("yourList")}</h2>
           <AiListInput />
-          <label htmlFor="search" className="mt-3 block text-base font-medium">{t("searchItems")}</label>
-          <div className="relative mt-2">
+          <label htmlFor="search" className="mt-2 block text-sm font-medium">{t("searchItems")}</label>
+          <div className="relative mt-1">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" aria-hidden />
             <input
               id="search"
@@ -121,52 +112,50 @@ export function HomeScreen() {
                     <div>{i.name}</div>
                     <Badge variant={i.snap ? "snap" : "not"}>{i.snap ? t("snap") : t("notSnap")}</Badge>
                   </div>
-                  <button
+                  <Button
                     type="button"
                     onClick={() => { trip.addItem(i.id); setQuery(""); }}
-                    className="tap flex items-center gap-1 rounded-xl bg-primary px-4 font-semibold text-primary-foreground"
+                    className="tap h-auto shrink-0 gap-1 rounded-lg px-3 font-semibold shadow-none"
                   >
                     <Plus className="h-4 w-4" aria-hidden /> {t("add")}
-                  </button>
+                  </Button>
                 </li>
               ))}
             </ul>
           )}
 
-          <button
+          <Button
             type="button"
             onClick={() => { trip.setList(usualCart.map((e) => ({ ...e }))); setUsualLoaded(true); }}
-            className="tap mt-4 flex w-full items-center justify-center gap-2 rounded-xl border-2 border-primary px-4 font-semibold text-primary"
+            variant="outline"
+            className="tap mt-2 h-auto w-full whitespace-normal rounded-lg border-primary px-3 font-semibold text-primary shadow-none"
           >
             <ShoppingCart className="h-5 w-5" aria-hidden /> {t("useUsual")}
-          </button>
-          <p className="mt-1 text-center text-sm text-muted-foreground">{t("basedOnPast")}</p>
+          </Button>
+          <p className="mt-1 text-center text-xs text-muted-foreground">{t("basedOnPast")}</p>
 
           {trip.list.length === 0 ? (
-            <p className="mt-4 text-muted-foreground">{t("emptyList")}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{t("emptyList")}</p>
           ) : (
-            <ul className="mt-4 flex flex-col gap-2">
+            <ul className="mt-2 divide-y divide-border">
               {usualLoaded && <li className="sr-only">{t("basedOnPast")}</li>}
               {trip.list.map((e) => {
-                const item = items.find((i) => i.id === e.item)!;
+                const item = items.find((i) => i.id === e.item);
+                if (!item) return null;
                 return (
-                  <li key={e.item} className="rounded-xl border border-border p-3">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <div className="font-medium">{item.name}</div>
-                        <div className="mt-1"><Badge variant={item.snap ? "snap" : "not"}>{item.snap ? t("snap") : t("notSnap")}</Badge></div>
-                        {item.note && <p className="mt-1 text-sm text-muted-foreground">{item.note}</p>}
-                      </div>
-                      <button type="button" aria-label={`${t("remove")} ${item.name}`} onClick={() => setQty(e.item, 0)} className="tap flex w-11 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted">
-                        <Trash2 className="h-5 w-5" aria-hidden />
-                      </button>
+                  <li key={e.item} className="grid h-11 grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-1">
+                    <div className="min-w-0" title={[item.name, item.note].filter(Boolean).join(" · ")}>
+                      <div className="truncate text-xs font-medium leading-4">{item.name}</div>
+                      <div className="leading-4"><Badge variant={item.snap ? "snap" : "not"}>{item.snap ? t("snap") : t("notSnap")}</Badge></div>
+                      {item.note && <p className="sr-only">{item.note}</p>}
                     </div>
-                    <div className="mt-2 flex items-center gap-3">
-                      <span className="text-sm text-muted-foreground">{t("qty")}</span>
-                      <button type="button" aria-label={t("decrease")} onClick={() => setQty(e.item, e.qty - 1)} className="tap flex w-11 items-center justify-center rounded-xl border border-border"><Minus className="h-4 w-4" aria-hidden /></button>
-                      <span className="w-6 text-center font-semibold" aria-live="polite">{e.qty}</span>
-                      <button type="button" aria-label={t("increase")} onClick={() => setQty(e.item, e.qty + 1)} className="tap flex w-11 items-center justify-center rounded-xl border border-border"><Plus className="h-4 w-4" aria-hidden /></button>
+                    <div className="flex shrink-0 items-center">
+                      <span className="sr-only">{t("qty")}</span>
+                      <Button type="button" variant="ghost" size="icon" aria-label={t("decrease")} onClick={() => setQty(e.item, e.qty - 1)} className="tap h-11 w-11 rounded-lg"><Minus aria-hidden /></Button>
+                      <span className="min-w-5 text-center text-sm font-semibold" aria-live="polite">{e.qty}</span>
+                      <Button type="button" variant="ghost" size="icon" aria-label={t("increase")} onClick={() => setQty(e.item, e.qty + 1)} className="tap h-11 w-11 rounded-lg"><Plus aria-hidden /></Button>
                     </div>
+                    <Button type="button" variant="ghost" size="icon" aria-label={`${t("remove")} ${item.name}`} onClick={() => setQty(e.item, 0)} className="tap h-11 w-11 rounded-lg text-muted-foreground"><Trash2 aria-hidden /></Button>
                   </li>
                 );
               })}
@@ -175,9 +164,11 @@ export function HomeScreen() {
         </Card>
 
         {error && <p role="alert" className="text-base text-destructive">{error}</p>}
-        <button type="button" onClick={onCompare} className="tap min-h-[52px] rounded-xl bg-primary px-4 text-lg font-bold text-primary-foreground">
-          {t("compare")}
-        </button>
+        <div className="fixed inset-x-0 bottom-14 z-40 bg-background">
+          <div className="mx-auto max-w-[480px] px-3 py-1.5">
+            <Button type="button" onClick={onCompare} className="tap h-11 w-full whitespace-normal rounded-lg px-3 text-base font-bold shadow-none">{t("compare")}</Button>
+          </div>
+        </div>
       </main>
       <Footer />
     </Shell>
