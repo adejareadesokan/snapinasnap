@@ -94,7 +94,7 @@ export function bestSplitPlan(list: ListEntry[], home: LatLng, mode: Mode): Plan
         let pick: { s: Store; p: number } | null = null;
         for (const s of pair) {
           const p = priceAt(e.item, s.id);
-          if (p != null && (!pick || p < pick.s && false || !pick || p < pick.p)) pick = { s, p };
+          if (p != null && (!pick || p < pick.p)) pick = { s, p };
         }
         return { item: e.item, qty: e.qty, storeId: pick?.s.id ?? null, unit: pick?.p ?? null, deal: pick ? findDeal(e.item, pick.s.id) : undefined };
       });
