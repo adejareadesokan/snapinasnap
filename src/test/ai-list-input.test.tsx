@@ -68,8 +68,8 @@ describe("AI shopping list flow", () => {
     fireEvent.change(screen.getByRole("textbox"), { target: { value: "turkey and something for lunch" } });
     fireEvent.click(screen.getByRole("button", { name: "Add to my list" }));
     await waitFor(() => expect(readList).toHaveBeenCalledWith({ data: { text: "turkey and something for lunch", lang: "en", current_item_ids: ["bread"] } }));
-    await waitFor(() => expect(screen.getAllByRole("button", { name: "Add", exact: true })).toHaveLength(1));
-    fireEvent.click(screen.getByRole("button", { name: "Add", exact: true }));
+    await waitFor(() => expect(screen.getAllByRole("button", { name: /^Add$/ })).toHaveLength(1));
+    fireEvent.click(screen.getByRole("button", { name: /^Add$/ }));
     expect(JSON.parse(screen.getByTestId("cart").textContent ?? "[]")).toEqual([{ item: "bread", qty: 2 }, { item: "turkey", qty: 1 }, { item: "cheese_slices", qty: 1 }]);
   });
 });
