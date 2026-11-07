@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import type { ListEntry, Mode } from "@/lib/planner";
+import { addParsedMatches, type ParsedList } from "@/lib/parse-list";
 
 type Trip = { zip: string; mode: Mode; list: ListEntry[]; plan: { kind: "one" | "split"; storeIds: string[] } | null };
 type Ctx = Trip & {
@@ -7,6 +8,7 @@ type Ctx = Trip & {
   setMode: (m: Mode) => void;
   setList: (l: ListEntry[]) => void;
   addItem: (id: string) => void;
+  addMatches: (matches: ParsedList["matches"]) => void;
   setPlan: (p: Trip["plan"]) => void;
 };
 const TripContext = createContext<Ctx | null>(null);
@@ -31,6 +33,7 @@ export function TripProvider({ children }: { children: ReactNode }) {
     setZip: (zip) => setTrip((t) => ({ ...t, zip })),
     setMode: (mode) => setTrip((t) => ({ ...t, mode })),
     setList: (list) => setTrip((t) => ({ ...t, list })),
+    addMatches: (matches) => setTrip((t) => ({ ...t, list: addParsedMatches(t.list, matches) })),
     addItem: (id) =>
       setTrip((t) => ({
         ...t,
