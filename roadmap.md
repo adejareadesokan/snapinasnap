@@ -1,5 +1,12 @@
 # AI shopping list
 
+## Compact phone layout
+- [ ] Compact header, telephone footer, and Home controls/list with sticky comparison action.
+- [ ] Collapse secondary comparison plans and sale sections; compact trip map and nearby stops.
+- [ ] Verify 390x844 layouts, tap targets, expansion, existing links, and shopping flow without changing AI or business rules.
+
+## AI shopping list
+
 - [x] Connect Lovable Cloud and secure Lovable AI access.
 - [x] Add structured catalog-only parse-list function without text storage or app logging.
 - [x] Add translated Home input, results, loading, and failure states without altering existing shopping flow.
