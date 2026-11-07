@@ -73,11 +73,12 @@ export function HomeScreen() {
                 <Button
                   key={id}
                   type="button"
+                  variant="ghost"
                   aria-pressed={trip.mode === id}
                   onClick={() => trip.setMode(id)}
                   className={cn(
                     "tap h-auto min-w-0 flex-col gap-0 rounded-none border-0 px-0.5 py-0 text-[10px] font-semibold leading-3 shadow-none whitespace-normal",
-                    trip.mode === id ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card",
+                    trip.mode === id ? "border-primary bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground" : "border-border bg-card text-ink hover:bg-muted hover:text-ink",
                   )}
                 >
                   <Icon className="h-4 w-4 shrink-0" aria-hidden />
