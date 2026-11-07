@@ -1,10 +1,10 @@
 # AI shopping list
 
 ## Categorized catalog and meal suggestions
-- [ ] Replace only items and usual cart with the supplied catalog and prices.
-- [ ] Add translated item names and category search filters without changing existing layout or links.
-- [ ] Update AI meal-category instructions and exclude current-list suggestions while preserving privacy and quantity rules.
-- [ ] Test catalog values, filters, meal rules, and the live shopping and AI flows.
+- [x] Replace only items and usual cart with the supplied catalog and prices.
+- [x] Add translated item names and category search filters without changing existing layout or links.
+- [x] Update AI meal-category instructions and exclude current-list suggestions while preserving privacy and quantity rules.
+- [x] Test catalog values, filters, meal rules, and the live shopping and AI flows.
 
 ## Compact phone layout
 - [x] Compact header, telephone footer, and Home controls/list with sticky comparison action.
