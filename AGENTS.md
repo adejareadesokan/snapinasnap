@@ -31,3 +31,5 @@ use the editor.
 
 - SNAP app: sample data lives in src/data, pricing/route math in src/lib/planner.ts (tested), UI strings only in src/i18n/*.json via useT(). Why: keeps data, rules and translations swappable.
 - Never name a route file route.tsx (reserved by TanStack Router); the route screen lives at /trip.
+- AI list parsing uses a public POST createServerFn in src/lib/parse-list.functions.ts and server-only AI SDK Responses helpers; the existing src/data catalog is authoritative so AI and search cannot drift.
+- Validate AI output and merge explicit quantities through src/lib/parse-list.ts; keep AI input/results ephemeral and catch errors before shared logging to avoid recording submitted text.

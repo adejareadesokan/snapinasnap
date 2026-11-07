@@ -8,6 +8,8 @@ export const Route = createFileRoute("/trip")({
       { name: "description", content: "Map and directions to your chosen SNAP/EBT stores." },
       { property: "og:title", content: "Your route — SNAP in a Snap" },
       { property: "og:description", content: "Map and directions to your chosen SNAP/EBT stores." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: RouteScreen,

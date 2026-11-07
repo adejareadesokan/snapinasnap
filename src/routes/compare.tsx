@@ -8,6 +8,8 @@ export const Route = createFileRoute("/compare")({
       { name: "description", content: "Compare grocery and travel costs across SNAP/EBT stores." },
       { property: "og:title", content: "Compare stores — SNAP in a Snap" },
       { property: "og:description", content: "Compare grocery and travel costs across SNAP/EBT stores." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: CompareScreen,

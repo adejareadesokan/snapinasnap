@@ -1,0 +1,53 @@
+import { createOpenAI } from "@ai-sdk/openai";
+import { Output, streamText, type ModelMessage } from "ai";
+import { parseListSchema } from "../parse-list";
+
+import {
+  createLovableAiGatewayRunIdFetch,
+  getLovableAiGatewayRunId,
+  withLovableAiGatewayRunIdHeader,
+} from "./run-id.server.ts";
+
+export function createResponsesCall(
+  request: Request,
+  config: { baseURL: string; apiKey: string; model: string },
+  messages: ModelMessage[],
+  instructions?: string,
+) {
+  const runIdFetch = createLovableAiGatewayRunIdFetch(getLovableAiGatewayRunId(request));
+  const provider = createOpenAI({
+    baseURL: `${config.baseURL.replace(/\/+$/, "").replace(/\/v1$/, "")}/v1`,
+    apiKey: config.apiKey,
+    headers: { "Lovable-API-Key": config.apiKey, "X-Lovable-AIG-SDK": "vercel-ai-sdk" },
+    fetch: runIdFetch.fetch,
+  });
+  const reasoning = config.model !== "openai/chat-latest";
+  const result = streamText({
+    model: provider.responses(config.model),
+    ...(instructions ? { system: instructions } : {}),
+    messages,
+    abortSignal: request.signal,
+    output: Output.object({ name: "shopping_list", schema: parseListSchema }),
+    maxRetries: 0,
+    onError: () => {},
+    experimental_telemetry: { isEnabled: false, recordInputs: false, recordOutputs: false },
+    providerOptions: {
+      openai: {
+        store: false,
+        ...(reasoning
+          ? {
+              forceReasoning: true,
+              reasoningEffort: "low",
+              reasoningSummary: "auto",
+              include: ["reasoning.encrypted_content"],
+            }
+          : {}),
+      },
+    },
+  });
+  return {
+    result,
+    response: () =>
+      withLovableAiGatewayRunIdHeader(result.toUIMessageStreamResponse({ sendReasoning: true }), runIdFetch),
+  };
+}
