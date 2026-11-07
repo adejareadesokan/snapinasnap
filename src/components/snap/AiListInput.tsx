@@ -10,8 +10,8 @@ import type { ParsedList } from "@/lib/parse-list";
 import { Badge } from "./Shared";
 
 export function AiListInput() {
-  const { t, lang } = useT();
-  const { addMatches, addItem } = useTrip();
+  const { t, lang, itemName } = useT();
+  const { addMatches, addItem, list } = useTrip();
   const readList = useServerFn(parseList);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
@@ -42,7 +42,7 @@ export function AiListInput() {
     setNotFound([]);
     const requestedLanguage = lang;
     try {
-      const result = await readList({ data: { text: text.trim(), lang: requestedLanguage } });
+      const result = await readList({ data: { text: text.trim(), lang: requestedLanguage, current_item_ids: list.map((entry) => entry.item) } });
       if (!mounted.current) return;
       if ("error" in result) {
         setError(true);
@@ -88,14 +88,14 @@ export function AiListInput() {
       <div aria-live="polite">
         {suggestions.length > 0 && (
           <ul aria-label={t("mightNeed")} className="mt-2 flex flex-col gap-2">
-            {suggestions.map((suggestion) => {
+            {suggestions.filter((suggestion) => !list.some((entry) => entry.item === suggestion.item_id)).map((suggestion) => {
               const item = items.find((candidate) => candidate.id === suggestion.item_id);
               if (!item) return null;
               return (
                 <li key={item.id} className="rounded-lg border border-border p-3">
                   <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
                     <div className="min-w-0">
-                      <p className="break-words text-sm font-medium">{item.name}</p>
+                      <p className="break-words text-sm font-medium">{itemName(item.id)}</p>
                       <div className="mt-1"><Badge variant={item.snap ? "snap" : "not"}>{item.snap ? t("snap") : t("notSnap")}</Badge></div>
                       <p className="mt-2 break-words text-sm text-muted-foreground">{suggestion.reason}</p>
                     </div>

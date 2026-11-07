@@ -12,7 +12,8 @@ export type ParsedList = z.infer<typeof parseListSchema>;
 
 const catalogIds = new Set(items.map((item) => item.id));
 
-export function normalizeParsedList(input: ParsedList): ParsedList {
+export function normalizeParsedList(input: ParsedList, currentItemIds: readonly string[] = []): ParsedList {
+  const currentIds = new Set(currentItemIds);
   const quantities = new Map<string, number>();
   for (const match of input.matches) {
     if (!catalogIds.has(match.item_id)) continue;
@@ -22,7 +23,7 @@ export function normalizeParsedList(input: ParsedList): ParsedList {
   }
   const suggested = new Set<string>();
   const suggestions = input.suggestions.filter((suggestion) => {
-    if (!catalogIds.has(suggestion.item_id) || quantities.has(suggestion.item_id) || suggested.has(suggestion.item_id)) return false;
+    if (!catalogIds.has(suggestion.item_id) || currentIds.has(suggestion.item_id) || quantities.has(suggestion.item_id) || suggested.has(suggestion.item_id)) return false;
     suggested.add(suggestion.item_id);
     return true;
   }).slice(0, 3);

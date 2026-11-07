@@ -1,4 +1,5 @@
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import { useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import { createStableContext } from "./stable-context";
 import en from "@/i18n/en.json";
 import es from "@/i18n/es.json";
 import vi from "@/i18n/vi.json";
@@ -7,8 +8,8 @@ export type Lang = "en" | "es" | "vi";
 type Key = keyof typeof en;
 const dicts: Record<Lang, Record<Key, string>> = { en, es, vi };
 
-type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: Key, vars?: Record<string, string | number>) => string };
-const LanguageContext = createContext<Ctx | null>(null);
+type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: Key, vars?: Record<string, string | number>) => string; itemName: (id: string) => string };
+const LanguageContext = createStableContext<Ctx | null>("snap-language", null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("en");
@@ -31,7 +32,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     },
     [lang],
   );
-  return <LanguageContext.Provider value={{ lang, setLang, t }}>{children}</LanguageContext.Provider>;
+  const itemName = useCallback((id: string) => {
+    const key = `item_${id}` as Key;
+    return dicts[lang][key] ?? dicts.en[key] ?? id;
+  }, [lang]);
+  return <LanguageContext.Provider value={{ lang, setLang, t, itemName }}>{children}</LanguageContext.Provider>;
 }
 
 export function useT() {

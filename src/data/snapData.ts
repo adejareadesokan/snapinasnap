@@ -1,5 +1,9 @@
+import itemCatalog from "./items.json";
+
 export type Store = { id: string; name: string; address: string; lat: number; lng: number; snap: boolean; hours: string };
-export type Item = { id: string; name: string; snap: boolean; note?: string; prices: (number | null)[] };
+export const categories = ["All", "Breakfast", "Lunch", "Dinner", "Snacks", "Produce", "Pantry", "Baby", "Household"] as const;
+export type CategoryFilter = typeof categories[number];
+export type Item = { id: string; name: string; category: Exclude<CategoryFilter, "All">; snap: boolean; note?: string; prices: (number | null)[] };
 export type Deal = { item: string; store: string; sale_price: number; ends: string };
 export type Extra = { id: string; type: string; name: string; address: string; lat: number; lng: number; when: string; note: string };
 
@@ -18,33 +22,11 @@ export const stores: Store[] = [
   { id: "s5", name: "Central City Corner Market", address: "1800 Oretha Castle Haley Blvd, New Orleans, LA 70113", lat: 29.94, lng: -90.083, snap: true, hours: "9 AM–9 PM" },
 ];
 
-export const items: Item[] = [
-  { id: "milk", name: "Milk, 1 gallon", snap: true, prices: [3.79, 3.49, 3.99, 3.29, 4.19] },
-  { id: "eggs", name: "Eggs, 1 dozen", snap: true, prices: [3.29, 2.99, 3.49, 2.79, 3.69] },
-  { id: "bread", name: "Bread, 1 loaf", snap: true, prices: [2.49, 2.29, 2.79, 1.99, 2.89] },
-  { id: "rice", name: "Rice, 5 lb", snap: true, prices: [4.99, 4.49, 5.29, 4.29, 5.49] },
-  { id: "red_beans", name: "Red beans, 2 lb", snap: true, prices: [2.99, 2.69, 3.19, 2.59, 3.29] },
-  { id: "pinto", name: "Pinto beans, 2 lb", snap: true, prices: [2.79, 2.49, 2.99, 2.39, 3.19] },
-  { id: "chicken", name: "Chicken thighs, 3 lb", snap: true, prices: [7.49, 6.99, 7.99, 6.49, 8.29] },
-  { id: "beef", name: "Ground beef, 1 lb", snap: true, prices: [5.49, 4.99, 5.79, 4.89, 5.99] },
-  { id: "sausage", name: "Smoked sausage, 13 oz", snap: true, prices: [3.99, 3.79, 4.29, 3.49, 4.49] },
-  { id: "bananas", name: "Bananas, 2 lb", snap: true, prices: [1.18, 1.1, 1.3, 1.02, 1.38] },
-  { id: "apples", name: "Apples, 3 lb bag", snap: true, prices: [4.49, 3.99, 4.79, 3.89, 4.99] },
-  { id: "onions", name: "Onions, 3 lb", snap: true, prices: [2.99, 2.79, 3.19, 2.69, 3.29] },
-  { id: "potatoes", name: "Potatoes, 5 lb", snap: true, prices: [3.99, 3.49, 4.29, 3.29, 4.49] },
-  { id: "frozen_veg", name: "Frozen mixed vegetables, 12 oz", snap: true, prices: [1.29, 1.19, 1.39, 1.09, 1.49] },
-  { id: "tomatoes", name: "Canned tomatoes, 14 oz", snap: true, prices: [1.09, 0.99, 1.19, 0.95, 1.29] },
-  { id: "cereal", name: "Cereal, 12 oz", snap: true, prices: [3.49, 2.99, 3.79, 3.29, 3.99] },
-  { id: "pb", name: "Peanut butter, 16 oz", snap: true, prices: [2.79, 2.49, 2.99, 2.59, 3.19] },
-  { id: "oil", name: "Cooking oil, 48 oz", snap: true, prices: [4.29, 3.99, 4.49, 3.89, 4.79] },
-  { id: "oj", name: "Orange juice, 52 oz", snap: true, prices: [3.99, 3.69, 4.19, 3.49, 4.29] },
-  { id: "formula", name: "Baby formula, 12.4 oz", snap: true, prices: [17.99, 16.99, 18.49, 16.49, null] },
-  { id: "rotisserie", name: "Hot rotisserie chicken", snap: false, note: "Hot food is not SNAP eligible", prices: [6.99, 7.49, 7.29, 6.49, null] },
-  { id: "diapers", name: "Diapers, 30 ct", snap: false, prices: [9.99, 9.49, 10.49, 8.99, 10.99] },
-  { id: "paper_towels", name: "Paper towels, 6 rolls", snap: false, prices: [7.49, 6.99, 7.99, 6.79, 8.29] },
-  { id: "dish_soap", name: "Dish soap", snap: false, prices: [2.49, 2.29, 2.69, 2.19, 2.79] },
-  { id: "toothpaste", name: "Toothpaste", snap: false, prices: [2.99, 2.79, 3.19, 2.69, 3.29] },
-];
+export const items: Item[] = itemCatalog.map((item) => {
+  const category = categories.find((candidate) => candidate !== "All" && candidate === item.category);
+  if (!category || category === "All") throw new Error("Unknown catalog category");
+  return { ...item, category };
+});
 
 export const deals: Deal[] = [
   { item: "chicken", store: "s3", sale_price: 5.99, ends: "2026-11-12" },
@@ -63,9 +45,62 @@ export const extras: Extra[] = [
 ];
 
 export const usualCart = [
-  { item: "milk", qty: 1 }, { item: "eggs", qty: 1 }, { item: "bread", qty: 2 },
-  { item: "rice", qty: 1 }, { item: "red_beans", qty: 1 }, { item: "chicken", qty: 1 },
-  { item: "sausage", qty: 1 }, { item: "bananas", qty: 1 }, { item: "diapers", qty: 1 },
+  {
+    "item": "eggs",
+    "qty": 1
+  },
+  {
+    "item": "milk",
+    "qty": 1
+  },
+  {
+    "item": "grits",
+    "qty": 1
+  },
+  {
+    "item": "bread",
+    "qty": 2
+  },
+  {
+    "item": "turkey",
+    "qty": 1
+  },
+  {
+    "item": "cheese_slices",
+    "qty": 1
+  },
+  {
+    "item": "chicken",
+    "qty": 1
+  },
+  {
+    "item": "rice",
+    "qty": 1
+  },
+  {
+    "item": "red_beans",
+    "qty": 1
+  },
+  {
+    "item": "sausage",
+    "qty": 1
+  },
+  {
+    "item": "onions",
+    "qty": 1
+  },
+  {
+    "item": "bananas",
+    "qty": 1
+  },
+  {
+    "item": "juice_boxes",
+    "qty": 1
+  },
+  {
+    "item": "diapers",
+    "qty": 1
+  }
 ];
 
 export const zipCoords: Record<string, [number, number]> = {

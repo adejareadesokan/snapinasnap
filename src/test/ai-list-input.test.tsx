@@ -55,8 +55,21 @@ describe("AI shopping list flow", () => {
     mount();
     fireEvent.change(screen.getByRole("textbox"), { target: { value: text } });
     fireEvent.click(screen.getByRole("button"));
-    await waitFor(() => expect(readList).toHaveBeenCalledWith({ data: { text, lang } }));
+    await waitFor(() => expect(readList).toHaveBeenCalledWith({ data: { text, lang, current_item_ids: [] } }));
     expect(sessionStorage.getItem("snap-trip")).not.toContain(text);
     expect(JSON.stringify(localStorage)).not.toContain(text);
+  });
+  it("sends existing item IDs and never offers an existing or newly matched item as a suggestion", async () => {
+    sessionStorage.setItem("snap-trip", JSON.stringify({ zip: "70117", mode: "car", list: [{ item: "bread", qty: 2 }], plan: null }));
+    readList.mockResolvedValue({ matches: [{ item_id: "turkey", qty: 1 }], suggestions: [
+      { item_id: "bread", reason: "Lunch" }, { item_id: "turkey", reason: "Lunch" }, { item_id: "cheese_slices", reason: "Lunch" },
+    ], not_found: [] });
+    mount();
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "turkey and something for lunch" } });
+    fireEvent.click(screen.getByRole("button", { name: "Add to my list" }));
+    await waitFor(() => expect(readList).toHaveBeenCalledWith({ data: { text: "turkey and something for lunch", lang: "en", current_item_ids: ["bread"] } }));
+    await waitFor(() => expect(screen.getAllByRole("button", { name: /^Add$/ })).toHaveLength(1));
+    fireEvent.click(screen.getByRole("button", { name: /^Add$/ }));
+    expect(JSON.parse(screen.getByTestId("cart").textContent ?? "[]")).toEqual([{ item: "bread", qty: 2 }, { item: "turkey", qty: 1 }, { item: "cheese_slices", qty: 1 }]);
   });
 });
