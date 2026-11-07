@@ -8,6 +8,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Build a shopping list and find SNAP/EBT stores in New Orleans." },
       { property: "og:title", content: "SNAP in a Snap — Plan your grocery trip" },
       { property: "og:description", content: "Build a shopping list and find SNAP/EBT stores in New Orleans." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: HomeScreen,
