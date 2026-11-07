@@ -1,9 +1,9 @@
 # AI shopping list
 
 ## Compact phone layout
-- [ ] Compact header, telephone footer, and Home controls/list with sticky comparison action.
-- [ ] Collapse secondary comparison plans and sale sections; compact trip map and nearby stops.
-- [ ] Verify 390x844 layouts, tap targets, expansion, existing links, and shopping flow without changing AI or business rules.
+- [x] Compact header, telephone footer, and Home controls/list with sticky comparison action.
+- [x] Collapse secondary comparison plans and sale sections; compact trip map and nearby stops.
+- [x] Verify 390x844 layouts, tap targets, expansion, existing links, and shopping flow without changing AI or business rules.
 
 ## AI shopping list
 
