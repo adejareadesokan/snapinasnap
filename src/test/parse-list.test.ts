@@ -35,7 +35,21 @@ describe("AI list rules", () => {
     expect(parseListSchema.safeParse({ matches: [], suggestions: [] }).success).toBe(false);
   });
   it("uses the same complete catalog as the existing search", () => {
-    const catalog = parseListInstructions("en").split("Catalog (item IDs and names from the same data used by search):\n")[1];
-    expect(JSON.parse(catalog ?? "null")).toEqual(items.map(({ id, name }) => ({ id, name })));
+    const catalog = parseListInstructions("en").split("Catalog (item IDs, names, and categories from the same data used by search):\n")[1];
+    expect(JSON.parse(catalog ?? "null")).toEqual(items.map(({ id, name, category }) => ({ id, name, category })));
+  });
+  it("excludes current-list items from suggestions without blocking explicit quantity additions", () => {
+    const result = normalizeParsedList({ ...empty,
+      matches: [{ item_id: "milk", qty: 2 }],
+      suggestions: ["bread", "turkey", "cheese_slices", "milk"].map((item_id) => ({ item_id, reason: "Lunch" })),
+    }, ["bread", "milk"]);
+    expect(result.suggestions.map((suggestion) => suggestion.item_id)).toEqual(["turkey", "cheese_slices"]);
+    expect(addParsedMatches([{ item: "milk", qty: 1 }], result.matches)).toEqual([{ item: "milk", qty: 3 }]);
+  });
+  it("applies the three-suggestion cap after excluding existing items", () => {
+    const result = normalizeParsedList({ ...empty,
+      suggestions: ["bread", "turkey", "cheese_slices", "tuna", "tortillas"].map((item_id) => ({ item_id, reason: "Lunch" })),
+    }, ["bread"]);
+    expect(result.suggestions.map((suggestion) => suggestion.item_id)).toEqual(["turkey", "cheese_slices", "tuna"]);
   });
 });
