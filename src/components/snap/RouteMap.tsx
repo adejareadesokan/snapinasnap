@@ -20,7 +20,7 @@ export default function RouteMap({ points }: { points: MapPoint[] }) {
   const home = points.find((p) => p.kind === "home");
   if (home) route.push(home.pos);
   return (
-    <MapContainer bounds={bounds} scrollWheelZoom={false} className="h-72 w-full rounded-2xl" style={{ zIndex: 0 }}>
+    <MapContainer bounds={bounds} scrollWheelZoom={false} className="h-[220px] w-full rounded-xl" style={{ zIndex: 0 }}>
       <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Polyline positions={route} pathOptions={{ color: "var(--primary)", weight: 4, dashArray: "6 8" }} />
       {points.map((p, i) =>
