@@ -36,7 +36,7 @@ export function CompareScreen() {
   const listIds = new Set(trip.list.map((e) => e.item));
   const listDeals = deals.filter((d) => listIds.has(d.item));
   const suggested = deals.filter((d) => !listIds.has(d.item)).slice(0, 3);
-  const choose = (p: Plan) => { trip.setPlan({ kind: p.kind, storeIds: p.storeIds }); navigate({ to: "/route" }); };
+  const choose = (p: Plan) => { trip.setPlan({ kind: p.kind, storeIds: p.storeIds }); navigate({ to: "/trip" }); };
   const bestSingle = singles[0];
 
   return (
