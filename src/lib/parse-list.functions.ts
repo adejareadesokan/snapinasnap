@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest, setResponseHeader, setResponseStatus } from "@tanstack/react-start/server";
 import { APICallError, NoObjectGeneratedError } from "ai";
 import { z } from "zod";
-import { normalizeParsedList, parseListSchema, type ParsedList } from "./parse-list";
+import { normalizeParsedList, type ParsedList } from "./parse-list";
 import { createResponsesCall } from "./ai/responses.server";
 import { parseListInstructions } from "./parse-list.server";
 
